@@ -1,0 +1,8 @@
+INSERT INTO COURSE (title) VALUES ('Curs 1')
+INSERT INTO COURSE (title) VALUES('Curs 2')
+INSERT INTO COURSE (title) VALUES('Curs 3')
+INSERT INTO COURSE (title) VALUES('Curs 4')
+
+INSERT INTO COURSE_MATERIAL (url,course_id) VALUES ('msmkmk',1)
+INSERT INTO COURSE_MATERIAL (url,course_id) VALUES ('dklmal',2)
+INSERT INTO COURSE_MATERIAL (url,course_id) VALUES ('url',3)
