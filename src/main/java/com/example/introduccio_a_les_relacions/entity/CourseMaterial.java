@@ -1,5 +1,7 @@
 package com.example.introduccio_a_les_relacions.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +12,8 @@ public class CourseMaterial {
     private Long id;
     private String url;
 
-    @OneToOne
+    @JsonIgnore
+    @ManyToOne
     private Course course;
 
     public CourseMaterial(String url) {

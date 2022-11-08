@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface CourseMaterialRepository extends CrudRepository<CourseMaterial,Long> {
-    public List<CourseMaterial> findAll();
+    List<CourseMaterial> findAll();
 }

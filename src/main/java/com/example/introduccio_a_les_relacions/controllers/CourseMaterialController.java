@@ -4,7 +4,9 @@ import com.example.introduccio_a_les_relacions.entity.Course;
 import com.example.introduccio_a_les_relacions.entity.CourseMaterial;
 import com.example.introduccio_a_les_relacions.repositoris.CourseMaterialRepository;
 import com.example.introduccio_a_les_relacions.repositoris.CoursesRepository;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,18 +22,23 @@ public class CourseMaterialController {
     CourseMaterialRepository cmRep;
 
     @GetMapping("")
-    public List<CourseMaterial> llistatCourseMaterial() {
-        return cmRep.findAll();
+    public ResponseEntity<?> llistatCourseMaterial() {
+        List<CourseMaterial> courseMaterials = cmRep.findAll();
+        if (courseMaterials.isEmpty()){
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(courseMaterials);
+        }
     }
 
 
     @GetMapping("{id}")
-    public CourseMaterial llistatCourseMaterialId(@PathVariable Long id) {
-        if (cmRep.findById(id).isPresent()) {
-
-            return cmRep.findById(id).get();
+    public ResponseEntity<?> llistatCourseMaterialId(@PathVariable Long id) {
+        CourseMaterial courseMaterial = cmRep.findById(id).get();
+        if (cmRep.findById(id).isPresent()){
+            return ResponseEntity.ok(courseMaterial);
         } else {
-            return null;
+            return ResponseEntity.notFound().build();
         }
     }
 }

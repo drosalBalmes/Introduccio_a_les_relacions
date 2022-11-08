@@ -3,6 +3,7 @@ package com.example.introduccio_a_les_relacions.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -12,13 +13,8 @@ public class Course {
     private Long id;
     private String title;
 
-    @JsonIgnore
-    @OneToOne(mappedBy = "course")
-    private CourseMaterial courseMaterial;
-
-    public Course(String title) {
-        this.title = title;
-    }
+    @OneToMany(mappedBy = "course")
+    private List<CourseMaterial> courseMaterial;
 
     public Course() {
 
@@ -36,11 +32,15 @@ public class Course {
         this.id = id;
     }
 
-    public CourseMaterial getCourseMaterial() {
+    public Long getId() {
+        return id;
+    }
+
+    public List<CourseMaterial> getCourseMaterial() {
         return courseMaterial;
     }
 
-    public void setCourseMaterial(CourseMaterial courseMaterial) {
+    public void setCourseMaterial(List<CourseMaterial> courseMaterial) {
         this.courseMaterial = courseMaterial;
     }
 
