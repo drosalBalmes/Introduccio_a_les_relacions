@@ -14,7 +14,7 @@ public class Course {
     private Long id;
     private String title;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade = CascadeType.DETACH)
     @ToStringExclude
     private List<CourseMaterial> courseMaterial;
 
