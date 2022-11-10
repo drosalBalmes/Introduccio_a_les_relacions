@@ -13,7 +13,7 @@ public class CourseMaterial {
     private String url;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Course course;
 
     public CourseMaterial(String url) {

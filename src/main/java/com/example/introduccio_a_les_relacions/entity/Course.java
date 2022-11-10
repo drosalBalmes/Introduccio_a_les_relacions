@@ -1,6 +1,7 @@
 package com.example.introduccio_a_les_relacions.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.commons.lang3.builder.ToStringExclude;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,7 +14,8 @@ public class Course {
     private Long id;
     private String title;
 
-    @OneToMany(mappedBy = "course")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "course", cascade = CascadeType.REMOVE)
+    @ToStringExclude
     private List<CourseMaterial> courseMaterial;
 
     public Course() {

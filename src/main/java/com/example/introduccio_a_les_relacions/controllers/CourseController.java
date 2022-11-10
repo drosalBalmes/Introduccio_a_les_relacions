@@ -3,13 +3,17 @@ package com.example.introduccio_a_les_relacions.controllers;
 import com.example.introduccio_a_les_relacions.entity.Course;
 import com.example.introduccio_a_les_relacions.entity.CourseMaterial;
 import com.example.introduccio_a_les_relacions.repositoris.CoursesRepository;
+import org.hibernate.annotations.Fetch;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.data.repository.cdi.Eager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.persistence.FetchType;
 import java.util.List;
 
 @RestController
@@ -35,6 +39,7 @@ public class CourseController {
         Course course = courseRep.findById(id).get();
 
         if (courseRep.findById(id).isPresent()) {
+            System.out.println("Lazy o Eager");
             return ResponseEntity.ok(course);
 
         } else {
