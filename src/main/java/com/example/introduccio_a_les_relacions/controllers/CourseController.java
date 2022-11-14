@@ -2,16 +2,14 @@ package com.example.introduccio_a_les_relacions.controllers;
 
 import com.example.introduccio_a_les_relacions.entity.Course;
 import com.example.introduccio_a_les_relacions.entity.CourseMaterial;
+import com.example.introduccio_a_les_relacions.repositoris.CourseMaterialRepository;
 import com.example.introduccio_a_les_relacions.repositoris.CoursesRepository;
 import org.hibernate.annotations.Fetch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.repository.cdi.Eager;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.FetchType;
 import java.util.List;
@@ -45,6 +43,21 @@ public class CourseController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public Course eliminar(@PathVariable Long id) {
+        if (courseRep.existsById(id)) {
+            Course course = courseRep.findById(id).get();
+            for (CourseMaterial cm :course.getCourseMaterial()) {
+                cm.setCourse(null);
+            }
+            courseRep.deleteById(id);
+            return course;
+        }else {
+            return null;
+        }
+
     }
 
 }

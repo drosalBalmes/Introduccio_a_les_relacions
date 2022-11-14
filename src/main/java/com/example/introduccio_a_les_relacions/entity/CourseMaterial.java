@@ -1,6 +1,8 @@
 package com.example.introduccio_a_les_relacions.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -13,7 +15,7 @@ public class CourseMaterial {
     private String url;
 
     @JsonIgnore
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Course course;
 
     public CourseMaterial(String url) {
