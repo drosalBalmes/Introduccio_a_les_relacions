@@ -3,10 +3,12 @@ package com.example.introduccio_a_les_relacions.entity;
 import org.apache.commons.lang3.builder.ToStringExclude;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
+@Table(name = "courses")
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +18,9 @@ public class Course {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "course")
     @ToStringExclude
     private List<CourseMaterial> courseMaterial;
+
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> student = new ArrayList<>();
 
     public Course() {
 

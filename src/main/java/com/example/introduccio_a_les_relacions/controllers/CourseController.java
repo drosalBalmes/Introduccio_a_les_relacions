@@ -2,16 +2,11 @@ package com.example.introduccio_a_les_relacions.controllers;
 
 import com.example.introduccio_a_les_relacions.entity.Course;
 import com.example.introduccio_a_les_relacions.entity.CourseMaterial;
-import com.example.introduccio_a_les_relacions.repositoris.CourseMaterialRepository;
 import com.example.introduccio_a_les_relacions.repositoris.CoursesRepository;
-import org.hibernate.annotations.Fetch;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.data.repository.cdi.Eager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.FetchType;
 import java.util.List;
 
 @RestController
@@ -45,7 +40,7 @@ public class CourseController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     public Course eliminar(@PathVariable Long id) {
         if (courseRep.existsById(id)) {
             Course course = courseRep.findById(id).get();
